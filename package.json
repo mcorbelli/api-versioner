@@ -14,17 +14,29 @@
     "url": "https://mattiacorbelli.dev"
   },
   "license": "MIT",
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
   "private": false,
   "dependencies": {
-    "eslint": "^8.18.0",
     "express": "^4.18.1",
     "lodash": "^4.17.21",
+    "prettier": "^2.7.1",
     "semver": "^7.3.7"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.3",
     "@types/express": "^4.17.13",
     "@types/lodash": "^4.14.182",
-    "@types/semver": "^7.3.10"
+    "@types/prettier": "^2.6.3",
+    "@types/semver": "^7.3.10",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
   }
 }

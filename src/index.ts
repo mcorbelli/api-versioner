@@ -18,11 +18,7 @@ class ApiVersioner {
 
             }
 
-            var versionArray = [];
-
             for (let [versionKey, versionRouter] of versionsMap) {
-
-                versionArray.push(versionKey);
 
                 if (this.checkVersionMatch(this.extractVersion(req), versionKey)) {
                     return versionRouter(req, res, next);
