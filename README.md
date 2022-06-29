@@ -1,2 +1,2 @@
-# express-api-versioning
+# api-versioner
 api express version manager

@@ -1,0 +1,30 @@
+{
+  "name": "api-versioner",
+  "version": "0.0.1",
+  "description": "api express version manager",
+  "main": "./src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcorbelli/api-versioner.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Corbelli Mattia",
+    "email": "mattia.corbelli098@hotmail.it",
+    "url": "https://mattiacorbelli.dev"
+  },
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "eslint": "^8.18.0",
+    "express": "^4.18.1",
+    "lodash": "^4.17.21",
+    "semver": "^7.3.7"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.3",
+    "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.182",
+    "@types/semver": "^7.3.10"
+  }
+}
