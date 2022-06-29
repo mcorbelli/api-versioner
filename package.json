@@ -1,17 +1,28 @@
 {
   "name": "api-versioner",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "api express version manager",
-  "main": "./src/index.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mcorbelli/api-versioner.git"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "versioning"
+  ],
   "author": {
     "name": "Corbelli Mattia",
     "email": "mattia.corbelli098@hotmail.it",
     "url": "https://mattiacorbelli.dev"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublish": "yarn build"
   },
   "license": "MIT",
   "private": false,
