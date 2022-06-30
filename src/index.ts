@@ -1,48 +1,66 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { isNil } from 'lodash';
 import semver from 'semver';
 
 const { valid, satisfies } = semver;
 
+interface IOptions {
+    addNotFoundRoute: boolean;
+}
+
+interface IRoute {
+    versionsMap: Map<string, Router>;
+    options: IOptions;
+}
+
 class ApiVersioner {
 
-    static route(versionsMap: Map<string, Router>) {
+    static route(props: IRoute) {
 
         return (req: Request, res: Response, next: NextFunction) => {
 
-            if (isNil(req.query.version)) {
+            try {
 
-                return res.status(400).send({
-                    "error": 'no version of the api is specified',
+                for (let [versionKey, versionRouter] of props.versionsMap) {
+
+                    if (props.options.addNotFoundRoute) {
+                        this._addNotFoundRoute(versionRouter);
+                    }
+
+                    if (this._checkVersionMatch(this._extractVersion(req), versionKey)) {
+                        return versionRouter(req, res, next);
+                    }
+
+                }
+
+                res.status(404).send({
+                    "error": `${this._extractVersion(req)} doesn't match any versions`,
+                });
+
+            } catch (error) {
+
+                return res.status(500).send({
+                    "error": `error during execution: ${error}`,
                 });
 
             }
-
-            var versionArray = [];
-
-            for (let [versionKey, versionRouter] of versionsMap) {
-
-                versionArray.push(versionKey);
-
-                if (this.checkVersionMatch(this.extractVersion(req), versionKey)) {
-                    return versionRouter(req, res, next);
-                }
-
-            }
-
-            return res.status(400).send({
-                "error": `${this.extractVersion(req)} doesn't match any versions`,
-            });
 
         }
 
     }
 
-    static extractVersion(request: Request): string {
-        return `${request.query.version}`;
+    private static _extractVersion(req: Request): string {
+        return req.headers['accept-version']?.toString() ?? "1.0.0";
     }
 
-    static checkVersionMatch(requestedVersion: string, routeVersion: string): boolean {
+    private static _addNotFoundRoute(router: Router): void {
+        router.all('*', (req, res) => {
+            res.status(404).send({
+                "error": `route '${req.url}' does not exist`,
+            });
+        });
+    }
+
+    private static _checkVersionMatch(requestedVersion: string, routeVersion: string): boolean {
         return (valid(requestedVersion) != null) && satisfies(requestedVersion, routeVersion);
     }
 
