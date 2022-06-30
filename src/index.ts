@@ -44,4 +44,4 @@ class ApiVersioner {
 
 }
 
-export default ApiVersioner;
+module.exports = ApiVersioner;
