@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "prepare": "pnpm run build"
+    "prepare": "yarn build"
   },
   "license": "MIT",
   "private": false,
