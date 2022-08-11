@@ -18,8 +18,7 @@
     "url": "https://mattiacorbelli.dev"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "prepare": "yarn build"
+    "build": "tsc -p tsconfig.json"
   },
   "license": "MIT",
   "private": false,
